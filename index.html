@@ -10,8 +10,26 @@
     <div class="container">
         <h1>Bem-vindo!</h1>
         <p>Este é um exemplo básico de página HTML.</p>
-        <button onclick="mostrarMensagem()">Clique aqui</button>
+        <button onclick="enviarJson()">Clique aqui</button>
     </div>
-    <script src="script.js"></script>
+    <script>
+        function enviarJson() {
+            const data = {
+                "names": ["Gabriel Carvalho Misael", "Armando Pereira", "Humberto Mauro", "Rafael Oliveira", "Felipe Reis", "Pedro"],
+                "message": "Opa La Ele"
+            };
+            
+            fetch("https://fsdt-contact.onrender.com/contact", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(result => alert("Resposta: " + JSON.stringify(result)))
+            .catch(error => alert("Erro ao enviar: " + error));
+        }
+    </script>
 </body>
 </html>
